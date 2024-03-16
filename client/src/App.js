@@ -1,7 +1,7 @@
-import { Routes, Route } from "react-router-dom"
-import { Post } from "./components/Post"
-import { PostList } from "./components/PostLists"
-import { PostProvider } from "./contexts/PostContext"
+import { Routes, Route } from "react-router-dom";
+import { Post } from "./components/Post";
+import { PostList } from "./components/PostLists";
+import { PostProvider } from "./contexts/PostContext";
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
         />
       </Routes>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
