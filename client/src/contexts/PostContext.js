@@ -11,7 +11,6 @@ export function usePost() {
 export function PostProvider({ children }) {
   const { id } = useParams();
   const { loading, error, value: post } = useAsync(() => getPost(id), [id]);
-  console.log(post, 14);
   const groupCommentsByParentId = useMemo(() => {
     if (post?.comments == null) return [];
     const group = {};
