@@ -11,16 +11,20 @@ export function usePost() {
 export function PostProvider({ children }) {
   const { id } = useParams();
   const { loading, error, value: post } = useAsync(() => getPost(id), [id]);
-
+  console.log(post, 14);
   const groupCommentsByParentId = useMemo(() => {
-    if (post?.comments === null) return [];
+    if (post?.comments == null) return [];
     const group = {};
-    post.comments.array.forEach((comment) => {
+    post.comments.forEach((comment) => {
       group[comment.parentId] ||= [];
       group[comment.parentId].push(comment);
     });
-  }, [post.comments]);
+    return group;
+  }, [post?.comments]);
 
+  function getReplies(parentId) {
+    return groupCommentsByParentId[parentId];
+  }
   return (
     <Context.Provider
       value={{
@@ -28,6 +32,8 @@ export function PostProvider({ children }) {
           id,
           ...post,
         },
+        getReplies,
+        rootComments: groupCommentsByParentId[null],
       }}
     >
       {loading ? (
